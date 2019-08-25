@@ -40,3 +40,5 @@ class Metronome:
     # create new metronome job
 
     # update existing metronome job
+
+    # create or update metronome job
