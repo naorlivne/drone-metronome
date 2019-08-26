@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class Metronome:
@@ -47,10 +48,9 @@ class Metronome:
             Returns:
                 response_json -- the response JSON returned from metronome
         """
-
         url = self.metronome_host + "/v0/scheduled-jobs"
 
-        response = requests.request("POST", url, headers=self.headers, timeout=self.timeout, data=job_json,)
+        response = requests.request("POST", url, headers=self.headers, timeout=self.timeout, data=job_json)
         if response.status_code == 201:
             return response.json()
         else:
@@ -58,6 +58,23 @@ class Metronome:
             print("failed creating metronome job")
             raise Exception
 
-    # update existing metronome job
+    def update_metronome_job(self, job_json: str) -> dict:
+        """Updates a metronome jobs & raise an error if it can't
+
+            Arguments:
+                job_json -- a string of the job JSON description (string because it's taken directly from a file)
+            Returns:
+                response_json -- the response JSON returned from metronome
+        """
+        job_dict = json.loads(job_json)
+        url = self.metronome_host + "/v0/scheduled-jobs/" + job_dict["id"]
+
+        response = requests.request("PUT", url, headers=self.headers, timeout=self.timeout, data=job_json)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(response.json())
+            print("failed updating metronome job")
+            raise Exception
 
     # create or update metronome job
