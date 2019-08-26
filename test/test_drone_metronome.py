@@ -130,3 +130,12 @@ class BaseTests(TestCase):
                                text='{"test_json_key": "test_json_value"}')
             reply = test_metronome_connection.create_or_update_metronome_job('{"id": "test"}')
             self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
+
+    def test_main_init(self):
+        test_envvars = {"PLUGIN_METRONOME_JOB_FILE": test_files_location + "/metronome.json"}
+        with mock.patch.dict(os.environ, test_envvars):
+            with requests_mock.Mocker() as request_mocker:
+                request_mocker.head('http://metronome.mesos:9000/v1/jobs/prod.example.app', status_code=200)
+                request_mocker.put('http://metronome.mesos:9000/v0/scheduled-jobs/prod.example.app', status_code=200,
+                                   text='{"test_json_key": "test_json_value"}')
+                init()
