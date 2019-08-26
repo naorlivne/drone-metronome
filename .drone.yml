@@ -23,4 +23,15 @@ steps:
     repo: naorlivne/drone-metronome
     tags:
       - latest
-      - $DRONE_BUILD_NUMBER
+
+- name: docker_build_version
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: naorlivne/drone-metronome
+    tags:
+      - latest
