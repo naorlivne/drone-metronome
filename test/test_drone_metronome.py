@@ -53,7 +53,8 @@ class BaseTests(TestCase):
         test_metronome_connection = Metronome()
         expected_test_metronome_connection_headers = {
             'cache-control': "no-cache",
-            'Connection': "keep-alive"
+            'Connection': "keep-alive",
+            'Content-Type': "application/json",
         }
         expected_test_metronome_connection_metronome_host = "http://metronome.mesos:9000"
         expected_test_metronome_connection_timeout = 60
@@ -76,8 +77,23 @@ class BaseTests(TestCase):
             self.assertFalse(reply)
 
     def test_metronome_check_metronome_job_exists_connection_or_permission_issue(self):
-        test_metronome_connection = Metronome()
+        test_metronome_connection = Metronome(metronome_host="http://metronome.mesos:9000")
         with requests_mock.Mocker() as request_mocker:
             request_mocker.head('http://metronome.mesos:9000/v1/jobs/test_job', status_code=500)
-            with self.assertRaises(ConnectionError):
+            with self.assertRaises(Exception):
                 test_metronome_connection.check_metronome_job_exists("test_job")
+
+    def test_metronome_create_metronome_job(self):
+        test_metronome_connection = Metronome()
+        with requests_mock.Mocker() as request_mocker:
+            request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=201,
+                                text='{"test_json_key": "test_json_value"}')
+            reply = test_metronome_connection.create_metronome_job("{}")
+            self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
+
+    def test_metronome_create_metronome_job_failure(self):
+        test_metronome_connection = Metronome(metronome_host="http://metronome.mesos:9000")
+        with requests_mock.Mocker() as request_mocker:
+            request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=401)
+            with self.assertRaises(Exception):
+                test_metronome_connection.create_metronome_job("{}")

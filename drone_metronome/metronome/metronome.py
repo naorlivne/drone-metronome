@@ -12,7 +12,8 @@ class Metronome:
         """
         self.headers = {
             'cache-control': "no-cache",
-            'Connection': "keep-alive"
+            'Connection': "keep-alive",
+            'Content-Type': "application/json"
         }
         self.metronome_host = metronome_host
         self.timeout = 60
@@ -35,9 +36,27 @@ class Metronome:
         elif response.status_code == 404:
             return False
         else:
-            raise ConnectionError
+            print("unable to determine if metronome job exists")
+            raise Exception
 
-    # create new metronome job
+    def create_metronome_job(self, job_json: str) -> dict:
+        """creates a metronome jobs & raise an error if it can't
+
+            Arguments:
+                job_json -- a string of the job JSON description (string because it's taken directly from a file)
+            Returns:
+                response_json -- the response JSON returned from metronome
+        """
+
+        url = self.metronome_host + "/v0/scheduled-jobs"
+
+        response = requests.request("POST", url, headers=self.headers, timeout=self.timeout, data=job_json,)
+        if response.status_code == 201:
+            return response.json()
+        else:
+            print(response.json())
+            print("failed creating metronome job")
+            raise Exception
 
     # update existing metronome job
 
