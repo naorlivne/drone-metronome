@@ -5,7 +5,7 @@ import json
 class Metronome:
 
     def __init__(self, metronome_host: str = "http://metronome.mesos:9000"):
-        """Init the metronome api conenction object with host & headers
+        """Init the metronome api connection object with host & headers
 
             Arguments:
                 metronome_host -- the url of the metronome host without a trailing slash (/), defaults to
@@ -77,4 +77,21 @@ class Metronome:
             print("failed updating metronome job")
             raise Exception
 
-    # create or update metronome job
+    def create_or_update_metronome_job(self, job_json: str) -> dict:
+        """Creates a metronome job if it does not exist or updates a metronome jobs if it does exist
+
+            Arguments:
+                job_json -- a string of the job JSON description (string because it's taken directly from a file)
+            Returns:
+                response_json -- the response JSON returned from metronome
+        """
+        job_dict = json.loads(job_json)
+
+        job_exists = self.check_metronome_job_exists(job_dict["id"])
+
+        if job_exists is False:
+            response_json = self.create_metronome_job(job_json)
+        elif job_exists is True:
+            response_json = self.update_metronome_job(job_json)
+
+        return response_json

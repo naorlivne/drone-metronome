@@ -102,7 +102,7 @@ class BaseTests(TestCase):
         test_metronome_connection = Metronome()
         with requests_mock.Mocker() as request_mocker:
             request_mocker.put('http://metronome.mesos:9000/v0/scheduled-jobs/test', status_code=200,
-                                text='{"test_json_key": "test_json_value"}')
+                               text='{"test_json_key": "test_json_value"}')
             reply = test_metronome_connection.update_metronome_job('{"id": "test"}')
             self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
 
@@ -112,3 +112,21 @@ class BaseTests(TestCase):
             request_mocker.put('http://metronome.mesos:9000/v0/scheduled-jobs/test', status_code=401)
             with self.assertRaises(Exception):
                 test_metronome_connection.update_metronome_job('{"id": "test"}')
+
+    def test_metronome_create_or_update_metronome_job_create(self):
+        test_metronome_connection = Metronome()
+        with requests_mock.Mocker() as request_mocker:
+            request_mocker.head('http://metronome.mesos:9000/v1/jobs/test', status_code=404)
+            request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=201,
+                                text='{"test_json_key": "test_json_value"}')
+            reply = test_metronome_connection.create_or_update_metronome_job('{"id": "test"}')
+            self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
+
+    def test_metronome_create_or_update_metronome_job_update(self):
+        test_metronome_connection = Metronome()
+        with requests_mock.Mocker() as request_mocker:
+            request_mocker.head('http://metronome.mesos:9000/v1/jobs/test', status_code=200)
+            request_mocker.put('http://metronome.mesos:9000/v0/scheduled-jobs/test', status_code=200,
+                               text='{"test_json_key": "test_json_value"}')
+            reply = test_metronome_connection.create_or_update_metronome_job('{"id": "test"}')
+            self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
