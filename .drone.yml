@@ -6,13 +6,15 @@ steps:
   image: python:3.7.4-alpine3.10
   commands:
   - pip install -r requirements.txt
-  - pip install codecov
   - coverage run -m unittest
   environment:
     TEST_FILES_LOCATION: test/test_files
 
 - name: codecov
-  image: robertstettner/drone-codecov
-  settings:
-    token:
+  image: python:3.7.4-alpine3.10
+  commands:
+  - pip install codecov
+  - codecov -t $TOKEN
+  environment:
+    TOKEN:
       from_secret: codecov_token
