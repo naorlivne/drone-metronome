@@ -18,8 +18,8 @@ steps:
   settings:
     username:
       from_secret: docker_username
-      password:
-        from_secret: docker_password
+    password:
+      from_secret: docker_password
     repo: naorlivne/drone-metronome
     tags:
       - latest
