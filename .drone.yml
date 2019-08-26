@@ -12,7 +12,7 @@ steps:
     TEST_FILES_LOCATION: test/test_files
 
 - name: codecov
-  image: plugins/codecov
+  image: robertstettner/drone-codecov
   settings:
     token:
       from_secret: codecov_token
