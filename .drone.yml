@@ -14,6 +14,6 @@ steps:
   image: plugins/codecov
   settings:
     token:
-      files:
-        - *.xml
+      paths:
+        - test
       from_secret: codecov_token
