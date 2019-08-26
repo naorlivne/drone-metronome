@@ -96,8 +96,7 @@ class BaseTests(TestCase):
         with requests_mock.Mocker() as request_mocker:
             request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=401)
             with self.assertRaises(Exception):
-                reply = test_metronome_connection.create_metronome_job('{"id": "test"}')
-                print(reply)
+                test_metronome_connection.create_metronome_job('{"id": "test"}')
 
     def test_metronome_update_metronome_job(self):
         test_metronome_connection = Metronome()
