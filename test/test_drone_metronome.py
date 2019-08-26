@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from drone_metronome import *
+from drone_metronome.drone_metronome_runner import *
 import os
 import requests_mock
 

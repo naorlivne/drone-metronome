@@ -1,5 +1,8 @@
-from drone_metronome import *
+from drone_metronome.functions.metronome.metronome import *
+from drone_metronome.functions.envvars.envvars import *
+from drone_metronome.functions.file.file import *
 from parse_it import ParseIt
+import os
 
 
 def init():
@@ -7,7 +10,8 @@ def init():
     print("reading envvars")
     parser = ParseIt(recurse=False, envvar_prefix="plugin_")
     metronome_host = parser.read_configuration_variable("metronome_host", default_value="http://metronome.mesos:9000")
-    metronome_job_file = parser.read_configuration_variable("metronome_job_file", default_value="metronome.json")
+    metronome_job_file = parser.read_configuration_variable("metronome_job_file",
+                                                            default_value=os.getcwd() + "/metronome.json")
     envvar_dict = read_all_envvars_to_dict()
 
     # get the job json
@@ -23,7 +27,3 @@ def init():
     metronome_connection = Metronome(metronome_host)
     metronome_connection.create_or_update_metronome_job(metronome_job_json)
     print("finished updating metronome")
-
-
-if __name__ == "__main__":
-    init()
