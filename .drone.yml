@@ -1,1 +1,10 @@
 kind: pipeline
+name: default
+
+steps:
+- name: run_python_unit_test
+  image: python:3.7.4-alpine3.10
+  commands:
+  - pip install -r requirements.txt
+  - pip install codecov
+  - coverage run -m unittest
