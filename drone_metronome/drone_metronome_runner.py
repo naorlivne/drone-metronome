@@ -11,7 +11,8 @@ def init():
     parser = ParseIt(recurse=False, envvar_prefix="plugin_")
     metronome_host = parser.read_configuration_variable("metronome_host", default_value="http://metronome.mesos:9000")
     metronome_job_file = parser.read_configuration_variable("metronome_job_file",
-                                                            default_value=os.getcwd() + "/metronome.json")
+                                                            default_value="metronome.json")
+    metronome_job_file = os.getcwd() + "/" + metronome_job_file
     envvar_dict = read_all_envvars_to_dict()
 
     # get the job json
