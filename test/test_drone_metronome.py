@@ -88,7 +88,7 @@ class BaseTests(TestCase):
         with requests_mock.Mocker() as request_mocker:
             request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=201,
                                 text='{"test_json_key": "test_json_value"}')
-            reply = test_metronome_connection.create_metronome_job("{}")
+            reply = test_metronome_connection.create_metronome_job('{"id": "test"}')
             self.assertDictEqual(reply, {"test_json_key": "test_json_value"})
 
     def test_metronome_create_metronome_job_failure(self):
@@ -96,7 +96,8 @@ class BaseTests(TestCase):
         with requests_mock.Mocker() as request_mocker:
             request_mocker.post('http://metronome.mesos:9000/v0/scheduled-jobs', status_code=401)
             with self.assertRaises(Exception):
-                test_metronome_connection.create_metronome_job("{}")
+                reply = test_metronome_connection.create_metronome_job('{"id": "test"}')
+                print(reply)
 
     def test_metronome_update_metronome_job(self):
         test_metronome_connection = Metronome()

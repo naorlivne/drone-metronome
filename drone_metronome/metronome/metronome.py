@@ -54,7 +54,7 @@ class Metronome:
         if response.status_code == 201:
             return response.json()
         else:
-            print(response.json())
+            print(response.json)
             print("failed creating metronome job")
             raise Exception
 
@@ -73,7 +73,7 @@ class Metronome:
         if response.status_code == 200:
             return response.json()
         else:
-            print(response.json())
+            print(response.json)
             print("failed updating metronome job")
             raise Exception
 
