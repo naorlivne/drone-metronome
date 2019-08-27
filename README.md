@@ -44,7 +44,7 @@ steps:
     my_image_tag: my_dynamic_image
 ```
 
-In the metronome.json file (please note the $ around the PLUGIN_MY_IMAGE_TAG key):
+In the metronome.json file (please note the $ before the PLUGIN_MY_IMAGE_TAG key):
 
 ```json
 {
