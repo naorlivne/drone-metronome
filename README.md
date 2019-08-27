@@ -64,10 +64,10 @@ will result in:
 
 ##Parameter Reference
 
-####metronome_host
+###metronome_host
 
 The Metronome server URL (no trailing slashs should be used), defaults to http://metronome.mesos:9000
 
-####metronome_job_file
+###metronome_job_file
 
 The Metronome configuration file location relative to the root folder of the repo, defaults to metronome.json.
