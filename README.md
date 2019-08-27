@@ -28,6 +28,8 @@ steps:
     metronome_job_file: metronome.json
 ```
 
+### Value substitution
+
 Example configuration with values substitution:
 ```yaml
 pipeline:
