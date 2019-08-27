@@ -68,8 +68,8 @@ will result in:
 
 #### metronome_host
 
-The Metronome server URL (no trailing slash should be used), defaults to http://metronome.mesos:9000
+The Metronome server URL (no trailing slash should be used), defaults to `http://metronome.mesos:9000`
 
 #### metronome_job_file
 
-The Metronome configuration file location relative to the root folder of the repo, defaults to metronome.json
+The Metronome configuration file location relative to the root folder of the repo, defaults to `metronome.json`
