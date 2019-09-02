@@ -15,7 +15,8 @@ The below pipeline configuration demonstrates simple usage:
 > In addition to the `.drone.yml` file you will need to create a `metronome.json` file that contains the Metronome configuration. Please see [here](test/test_files/metronome.json) for an example. 
 
 ```yaml
-pipeline:
+kind: pipeline
+type: docker
 name: default
 
 steps:
@@ -30,7 +31,8 @@ steps:
 
 Example configuration with values substitution:
 ```yaml
-pipeline:
+kind: pipeline
+type: docker
 name: default
 
 steps:
