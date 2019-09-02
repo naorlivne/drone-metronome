@@ -6,8 +6,6 @@ Code coverage: [![codecov](https://codecov.io/gh/naorlivne/drone-metronome/branc
 
 Drone plugin for deploying to [metronome](https://dcos.github.io/metronome/).
 
-Drone plugin to build and publish Docker images to a container registry. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-docker/).
-
 ## Usage
 
 This plugin can be used to deploy applications to a Metronome server, it will create\update the given Metronome tasks as needed.
