@@ -1,10 +1,10 @@
 kind: pipeline
 type: docker
-name: amd64
+name: amd64_build
 
 platform:
   os: linux
-  arch: amd64_build
+  arch: amd64
 
 steps:
 - name: run_python_unit_test
