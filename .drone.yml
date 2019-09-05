@@ -21,14 +21,13 @@ steps:
 - name: docker_build_version
   image: plugins/docker
   settings:
-    auto_tag: true
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: naorlivne/drone-metronome:linux-amd64
+    repo: naorlivne/drone-metronome
     tags:
-      - latest
+      - linux-amd64
 
 ---
 kind: pipeline
@@ -54,14 +53,13 @@ steps:
 - name: docker_build_version
   image: plugins/docker
   settings:
-    auto_tag: true
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: naorlivne/drone-metronome:linux-arm64
+    repo: naorlivne/drone-metronome
     tags:
-      - latest
+      - linux-arm64
 
 ---
 kind: pipeline
@@ -87,14 +85,13 @@ steps:
 - name: docker_build_version
   image: plugins/docker
   settings:
-    auto_tag: true
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: naorlivne/drone-metronome:linux-arm
+    repo: naorlivne/drone-metronome
     tags:
-      - latest
+      - linux-arm
 
 ---
 kind: pipeline
