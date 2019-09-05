@@ -8,7 +8,7 @@ import os
 def init():
     # read envvars
     print("reading envvars")
-    parser = ParseIt(recurse=False, envvar_prefix="plugin_")
+    parser = ParseIt(recurse=False, envvar_prefix="plugin_", config_type_priority=["env_vars"])
     metronome_host = parser.read_configuration_variable("metronome_host", default_value="http://metronome.mesos:9000")
     metronome_job_file = parser.read_configuration_variable("metronome_job_file",
                                                             default_value="metronome.json")
