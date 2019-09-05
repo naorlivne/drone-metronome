@@ -28,7 +28,6 @@ steps:
     repo: naorlivne/drone-metronome
     tags:
       - linux-amd64
-      - linux-amd64-$DRONE_BUILD_NUMBER
 
 ---
 kind: pipeline
@@ -61,7 +60,6 @@ steps:
     repo: naorlivne/drone-metronome
     tags:
       - linux-arm64
-      - linux-arm64-$DRONE_BUILD_NUMBER
 
 ---
 kind: pipeline
@@ -94,12 +92,11 @@ steps:
     repo: naorlivne/drone-metronome
     tags:
       - linux-arm
-      - linux-arm-$DRONE_BUILD_NUMBER
 
 ---
 kind: pipeline
 type: docker
-name: publish_docker_manifest_latest
+name: publish_docker_manifest
 
 steps:
 - name: manifest
@@ -111,30 +108,6 @@ steps:
       from_secret: docker_password
     target:  naorlivne/drone-metronome
     template: naorlivne/drone-metronome:OS-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm64
-
-depends_on:
-- amd64_build
-- arm64_build
-- arm_build
-
----
-kind: pipeline
-type: docker
-name: publish_docker_manifest_tagged
-
-steps:
-- name: manifest
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target:  naorlivne/drone-metronome:$DRONE_BUILD_NUMBER
-    template: naorlivne/drone-metronome:OS-ARCH-$DRONE_BUILD_NUMBER
     platforms:
       - linux/amd64
       - linux/arm64
