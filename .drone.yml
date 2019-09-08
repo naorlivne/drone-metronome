@@ -117,3 +117,23 @@ depends_on:
 - amd64_build
 - arm64_build
 - arm_build
+
+---
+kind: pipeline
+type: docker
+name: notify
+
+steps:
+- name: notify
+  image: drillster/drone-email
+  settings:
+    host: aspmx.l.google.com
+    port: 25
+    from: dronealert@dronealert.com
+    recipients: [ naorlivne@gmail.com ]
+    recipients_only: true
+    when:
+      status: [ changed, failure ]
+
+depends_on:
+- publish_docker_manifest
