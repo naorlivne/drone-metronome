@@ -132,8 +132,10 @@ steps:
     from: dronealert@dronealert.com
     recipients: [ naorlivne@gmail.com ]
     recipients_only: true
-    when:
-      status: [ changed, failure ]
+
+trigger:
+  status:
+  - failure
 
 depends_on:
 - publish_docker_manifest
