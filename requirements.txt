@@ -3,6 +3,7 @@ chardet==3.0.4
 codecov==2.0.15
 configobj==5.0.6
 coverage==4.5.4
+dpath==1.4.2
 idna==2.8
 parse-it==3.3.2
 ply==3.11
