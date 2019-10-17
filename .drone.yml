@@ -154,7 +154,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target:  naorlivne/drone-metronome-${DRONE_BUILD_NUMBER}
+    target:  naorlivne/drone-metronome:${DRONE_BUILD_NUMBER}
     template: naorlivne/drone-metronome:OS-ARCH-${DRONE_BUILD_NUMBER}
     platforms:
       - linux/amd64
