@@ -189,3 +189,4 @@ trigger:
 
 depends_on:
 - publish_docker_manifest
+- publish_docker_manifest_build_number
