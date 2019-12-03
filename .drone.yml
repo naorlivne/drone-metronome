@@ -166,6 +166,28 @@ depends_on:
 ---
 kind: pipeline
 type: docker
+name: publish_github_release
+
+trigger:
+  event:
+  - push
+
+steps:
+- name: create_changelog
+  image: naorlivne/drone-github-changelog-generator
+  settings:
+    github_user: ${DRONE_REPO_NAMESPACE}
+    github_project: ${DRONE_REPO_NAME}
+    output_path: CHANGELOG.md
+
+depends_on:
+- amd64_build
+- arm64_build
+- arm_build
+
+---
+kind: pipeline
+type: docker
 name: notify
 
 steps:
@@ -186,25 +208,3 @@ depends_on:
 - publish_docker_manifest
 - publish_docker_manifest_build_number
 - publish_github_release
-
----
-kind: pipeline
-type: docker
-name: publish_github_release
-
-trigger:
-  event:
-  - push
-
-steps:
-- name: create_changelog
-  image: naorlivne/drone-github-changelog-generator
-  settings:
-    github_user: ${DRONE_REPO_NAMESPACE}
-    github_project: ${DRONE_REPO_NAME}
-    output_path: CHANGELOG.md
-
-depends_on:
-- amd64_build
-- arm64_build
-- arm_build
