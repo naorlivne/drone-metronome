@@ -5,7 +5,7 @@ configobj==5.0.6
 coverage==5.0.3
 dpath==2.0.1
 idna==2.8
-parse-it==3.3.2
+parse-it==3.4.0
 ply==3.11
 pyhcl==0.4.0
 python-dotenv==0.10.5
