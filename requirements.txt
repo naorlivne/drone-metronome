@@ -13,6 +13,6 @@ PyYAML==5.3.1
 requests==2.23.0
 requests-mock==1.8.0
 six==1.14.0
-toml==0.10.0
+toml==0.10.1
 urllib3==1.25.9
 xmltodict==0.12.0
