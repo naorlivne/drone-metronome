@@ -8,7 +8,7 @@ idna==2.10
 parse-it==3.6.0
 ply==3.11
 pyhcl==0.4.4
-python-dotenv==0.17.0
+python-dotenv==0.17.1
 PyYAML==5.4.1
 requests==2.25.1
 requests-mock==1.8.0
