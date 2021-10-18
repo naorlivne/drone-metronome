@@ -9,7 +9,7 @@ parse-it==2021.9.26.20.47
 ply==3.11
 pyhcl==0.4.4
 python-dotenv==0.19.1
-PyYAML==5.4.1
+PyYAML==6.0
 requests==2.26.0
 requests-mock==1.9.3
 six==1.16.0
