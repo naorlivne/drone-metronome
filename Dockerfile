@@ -1,4 +1,4 @@
-FROM python:3.10.2-alpine3.14
+FROM python:3.11.0a6-alpine3.14
 
 COPY . /drone_metronome
 
