@@ -1,3 +1,6 @@
+> **Warning**
+> Drone cloud stopped working for months and as the developers of Drone seemed to stop caring I'm no longer able to fully test this nor will I longer have any use of it, as a result I'm stopping all development of this plugin.
+
 # drone-metronome
 
 CI/CD build status: [![Build Status](https://cloud.drone.io/api/badges/naorlivne/drone-metronome/status.svg)](https://cloud.drone.io/naorlivne/drone-metronome)
